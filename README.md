@@ -70,9 +70,9 @@ Installation Instructions:
    cd $HOME
    sudo git clone https://github.com/Crypt0Genesis/neutaro-node.git
    ```
-2. ""Go to the downloaded folder "OraiChain-Node"
+2. ""Go to the downloaded folder "neutaro-node"
    ```
-   cd Neutaro
+   cd neutaro-node
    ```
 3. **Permissions:**
    Set executable permissions for the `neutaro-setup.sh` :
