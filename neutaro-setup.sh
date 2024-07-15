@@ -1,4 +1,10 @@
-#!/bin/bash
+!/bin/bash
+
+echo -e "\e[33mInstalling System Updates\e[0m"
+sudo apt update && sudo apt upgrade -y
+sudo apt-get install figlet cowsay -y
+
+figlet "Crypto-Genesis"
 
 # Step 1
 wait_and_display_message() {
@@ -83,11 +89,11 @@ sudo apt update && sudo apt upgrade -y
 send_enter_if_needed
 
 # Install build-essential
-sudo apt install -y build-essential bsdmainutils
+sudo apt install -y build-essential bsdmainutils -y
 send_enter_if_needed
 
 # Install make, gcc, wget, git and liblz4-tool
-sudo apt install -y make gcc curl tar clang wget git pkg-config libssl-dev jq ncdu chrony liblz4-tool
+sudo apt install -y make gcc curl tar clang wget git pkg-config libssl-dev jq ncdu liblz4-tool -y
 send_enter_if_needed
 
 
@@ -141,7 +147,7 @@ pink_space
 
 source ~/.profile
 source $HOME/.bashrc
-source $HOME/.bash_profile
+
 
 echo -e "\e[32mGo has been installed successfully.\e[0m"
 
@@ -172,14 +178,18 @@ cd $HOME
 git clone https://github.com/Neutaro/Neutaro
 
 # D
-cd Neutaro/cmd/Neutaro/
+cd Neutaro
 
 # E
-go build
+git checkout "$version"
+
+make build
+
+# F
+wait_and_display_message 30 "Installation In Progress"
+make install
 
 # G
-sudo mv Neutaro $HOME/go/bin
-
 wait_and_display_message 30 "Download Completed"
 
 pink_space
@@ -198,6 +208,7 @@ cd "$HOME/"
 Neutaro init "$moniker_name" --chain-id Neutaro-1
 
 Neutaro config chain-id Neutaro-1
+Neutaro config keyring-backend os
 
 # Define the genesis.json file paths
 CONFIG_DIR="$HOME/.Neutaro/config/"
@@ -241,7 +252,7 @@ echo -e "\e[33mChoose download option:\e[0m"
 echo "1. Download the neutaro latest snapshot"
 pink_space
 echo "Please enter the option 1"
-echo "Waiting for input... (Timeout in 1 minute)"
+echo "Waiting for input... (Timeout in 15 seconds)"
 
 if read -t 15 option; then
     # Perform the selected action
@@ -314,7 +325,7 @@ ExecStart         = $HOME/go/bin/Neutaro start --home $HOME/.Neutaro
 TimeoutStopSec    = 300
 LimitNOFILE       = 65535
 Restart           = on-failure
-RestartSec        = 10
+RestartSec        = 3
 SyslogIdentifier  = Neutaro
 
 [Install]
@@ -350,7 +361,7 @@ change_config_values() {
     sed -i 's|pruning = "default"|pruning = "custom"|' "$1/app.toml"
     sed -i 's|pruning-keep-recent = "0"|pruning-keep-recent = "100"|' "$1/app.toml"
     sed -i 's|pruning-interval = "0"|pruning-interval = "19"|' "$1/app.toml"
-    sed -i 's|minimum-gas-prices = ""|minimum-gas-prices = "0uneutaro"|' "$1/app.toml"
+    sed -i 's|minimum-gas-prices = "0stake"|minimum-gas-prices = "0uneutaro"|' "$1/app.toml"
     sed -i 's|chain-id = ""|chain-id = "Neutaro-1"|' "$1/client.toml"
 }
 
@@ -399,7 +410,9 @@ echo "To check logs = sudo journalctl --unit=Neutaro --follow"
 pink_space
 
 #echo -e "\e[34mHappy Validating\e[0m"
-light_blue_text "**HAPPY VALIDATING!**"
+#light_blue_text "**HAPPY VALIDATING!**"
+
+cowsay "Stay positive and HAPPY VALIDATING!"
 
 # Step 24
 echo -e "\e[31mInitiating server reboot to apply configuration changes...\e[0m"
