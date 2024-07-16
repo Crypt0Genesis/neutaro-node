@@ -136,7 +136,7 @@ pink_space
 # Step 7
 echo -e "\e[33mCleaning Up Extracted files\e[0m"
 rm go1.22.2.linux-amd64.tar.gz
-echo -e "\e[32mExtracted Fles Cleaned\e[0m"
+echo -e "\e[32mExtracted Files Cleaned\e[0m"
 
 pink_space
 
