@@ -1,7 +1,15 @@
 # Neutaro Validator Node Deployment Script
 
 ```
-Crypto-Genesis Validator:
+Crypto-Genesis Neutaro Validator:
+
+https://nms1.neutaro.tech/Neutaro/staking/neutarovaloper1axnf92t5qzcxvxhkkzj2j605apazsz90jx9cs9
+
+Account Address:
+neutaro1axnf92t5qzcxvxhkkzj2j605apazsz90gmg3a7
+
+Operator Address:
+neutarovaloper1axnf92t5qzcxvxhkkzj2j605apazsz90jx9cs9
 ```
 
 ************************************************************************************************************************
