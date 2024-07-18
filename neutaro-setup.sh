@@ -227,6 +227,9 @@ fi
 
 pink_space
 
+source ~/.profile
+source $HOME/.bashrc
+
 # Download the new JSON file
 #wget -P "$CONFIG_DIR" http://154.26.153.186/genesis.json
 curl http://154.26.153.186/genesis.json >$HOME/.Neutaro/config/genesis.json
@@ -245,55 +248,33 @@ pink_space
 
 # Snapshot Download
 echo -e "\e[33mStarting Snapshot Download\e[0m"
+#!/bin/bash
 
-# Download the latest snapshot
-download_latest_snapshot() {
-    echo -e "\e[32mDownloading the latest snapshot...\e[0m"
-    # Download the latest snapshot from neutaro
-    curl -L http://poker.neutaro.tech/snapshot070624.tar.lz4 -o "$HOME/snapshot070624.tar.lz4"
-}
+# Move to the home directory
+cd $HOME || exit
 
-# Step 18
-echo -e "\e[33mChoose download option:\e[0m"
-echo "1. Download the neutaro latest snapshot"
-pink_space
-echo "Please enter the option 1"
-echo "Waiting for input... (Timeout in 15 seconds)"
+# Rename the existing directories
+mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old
+mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old
 
-if read -t 15 option; then
-    # Perform the selected action
-    case $option in
-        1)
-            download_latest_snapshot
-            ;;
-        *)
-            echo "Invalid option. Downloading the latest snapshot by default."
-            download_latest_snapshot
-            ;;
-    esac
+# Download the tar.lz4 file
+wget http://poker.neutaro.tech/snapshot070624.tar.lz4
+
+# Wait until the file is downloaded
+if [ -f snapshot070624.tar.lz4 ]; then
+    echo "File downloaded successfully."
+
+    # Decompress the tar.lz4 file
+    lz4 -d snapshot070624.tar.lz4
+
+    # Extract the tar file
+    tar -xf snapshot070624.tar
+
+    echo "Decompression and extraction completed."
 else
-    echo "No input received. Downloading the latest snapshot automatically."
-    download_latest_snapshot
+    echo "File download failed."
+    exit 1
 fi
-
-# Wait until the snapshot is downloaded
-while [ ! -f "$HOME/snapshot070624.tar.lz4" ] && [ ! -f "$HOME/neutaro_${snapshot_number}.tar.lz4" ]; do
-    sleep 1
-done
-
-echo -e "\e[32mSnapshot downloaded successfully\e[0m"
-
-# Unzip the folders
-echo "Unzipping the new Snapshot Folders..."
-for file in $HOME/*.tar.lz4; do
-        tar -I lz4 -xf "$file" -C $HOME/.Neutaro
-        rm "$file"
-done
-
-# Wait until all folders are unzipped
-while [ -n "$(find $HOME -maxdepth 1 -name '*.tar.lz4')" ]; do
-        sleep 1
-done
 
 echo -e "\e[32mNew Snapshot Folders unzipped successfully\e[0m"
 
