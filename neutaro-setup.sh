@@ -278,6 +278,12 @@ fi
 
 echo -e "\e[32mNew Snapshot Folders unzipped successfully\e[0m"
 
+echo -e "\e[32mNew Removing Downloaded Files\e[0m"
+
+sudo rm snapshot160724.tar  
+
+sudo rm snapshot160724.tar.lz4
+
 # Step 20
 
 cd $HOME
