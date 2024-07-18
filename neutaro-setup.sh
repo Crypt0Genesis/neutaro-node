@@ -258,17 +258,17 @@ mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old
 
 # Download the tar.lz4 file
-wget http://poker.neutaro.tech/snapshot070624.tar.lz4
+wget https://poker.neutaro.tech/snapshot160724.tar.lz4
 
 # Wait until the file is downloaded
-if [ -f snapshot070624.tar.lz4 ]; then
+if [ -f snapshot160724.tar.lz4 ]; then
     echo "File downloaded successfully."
 
     # Decompress the tar.lz4 file
-    lz4 -d snapshot070624.tar.lz4
+    lz4 -d snapshot160724.tar.lz4
 
     # Extract the tar file
-    tar -xf snapshot070624.tar
+    tar -xf snapshot160724.tar
 
     echo "Decompression and extraction completed."
 else
