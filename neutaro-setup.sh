@@ -136,7 +136,7 @@ pink_space
 # Step 7
 echo -e "\e[33mCleaning Up Extracted files\e[0m"
 rm go1.22.2.linux-amd64.tar.gz
-echo -e "\e[32mExtracted Files Cleaned\e[0m"
+echo -e "\e[32mExtracted Fles Cleaned\e[0m"
 
 pink_space
 
@@ -183,14 +183,19 @@ cd Neutaro
 # E
 git checkout "$version"
 
+sleep 10
+
 make build
 
 # F
 wait_and_display_message 30 "Installation In Progress"
+wait
+
 make install
 
 # G
 wait_and_display_message 30 "Download Completed"
+wait
 
 pink_space
 
@@ -223,13 +228,14 @@ fi
 pink_space
 
 # Download the new JSON file
-wget -P "$CONFIG_DIR" http://154.26.153.186/genesis.json
+#wget -P "$CONFIG_DIR" http://154.26.153.186/genesis.json
+curl http://154.26.153.186/genesis.json >$HOME/.Neutaro/config/genesis.json
 
 echo -e "\e[32mNew genesis.json file downloaded\e[0m"
 
 pink_space
 
-wget -P "$CONFIG_DIR" https://snap1.konsortech.xyz/neutaro/addrbook.json
+#wget -P "$CONFIG_DIR" https://snap1.konsortech.xyz/neutaro/addrbook.json
 
 echo -e "\e[32mNew addrbook.json file downloaded\e[0m"
 
