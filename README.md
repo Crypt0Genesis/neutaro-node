@@ -75,7 +75,7 @@ Initiates the validator node automatically upon completion of the installation p
 To deploy your Neutaro Validator node using this script, simply execute the deployment script and follow the on-screen prompts.
 
 **Getting Started:**
-To get started with deploying your OraiChain Validator node using this script, follow these simple steps:
+To get started with deploying your Neutaro Validator node using this script, follow these simple steps:
 
 ************************************************************************************************************************
 
